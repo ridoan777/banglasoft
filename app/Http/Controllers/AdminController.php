@@ -3,26 +3,100 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Carousel;
 use App\Models\Faq;
 use App\Models\Marquee;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 */
+
 	public function index()
 	{
+		$carouselData = Carousel::all();
 		$marqueeData = Marquee::all();
 		$faqData = Faq::all();
 
 		return view('components.admin.dashboard', [
 			'marqueeData' => $marqueeData, 
-			'faqData' => $faqData
+			'faqData' => $faqData,
+			'carouselData' => $carouselData,
 		]);
 	}
-// ---------MARQUEE CONTROL---------
+	// -------------------------------
+	
+
+ // ---------CARROUSEL CONTROL---------
+	public function carouselCreate(Request $request)
+	{
+		$validated = $request->validate([
+			'slider_img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+			'status' => 'required',
+		]);
+
+		if($request->hasFile('slider_img')){
+			$slider_img = $request->file('slider_img');
+
+			$imageName = substr(time(), -4) . '.' . $slider_img->getClientOriginalExtension();
+
+			$slider_img->storeAs('admin_files/carousel', $imageName, 'public');
+
+			$validated['slider_img'] = 'storage/admin_files/carousel/' . $imageName;
+		}
+
+		Carousel::create([
+			'slider_img' => $validated['slider_img'],
+			'status' => $validated['status'],
+		]);
+
+		return redirect()->route('admin');
+	}
+	// ------------------------------
+	public function carouselEdit($id){
+
+		$carousel = Carousel::find($id);
+		$triggerBlock = 'carousel';
+
+		return view('components.partials.admin.edit', [
+			'carousel' => $carousel, 
+			'triggerBlock' => $triggerBlock
+		]);
+	}
+	// ------------------------------
+	public function carouselUpdate(Request $request, $id){
+
+		$carousel = Carousel::findOrFail($id);
+
+		$validated = $request->validate([
+			'slider_img' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+			'status' => 'required',
+		]);
+
+		if($request->hasFile('slider_img')){
+			$slider_img = $request->file('slider_img');
+
+			$imageName = substr(time(), -4) . '.' . $slider_img->getClientOriginalExtension();
+
+			$slider_img->storeAs('admin_files/carousel', $imageName, 'public');
+
+			$validated['slider_img'] = 'storage/admin_files/carousel/' . $imageName;
+		}
+
+		$carousel->update($validated);
+
+		return redirect()->route('admin');
+	}
+	// ------------------------------
+	public function carouselDelete($id){
+
+		$carousel = Carousel::find($id);
+		$carousel->delete();
+
+		return redirect()->route('admin');
+	}
+ // ---------CARROUSEL CONTROL---------
+
+ // ---------MARQUEE CONTROL---------
 	public function marqueeCreate(Request $request)
 	{
 		$validated = $request->validate([
@@ -94,8 +168,9 @@ class AdminController extends Controller
 
 		return redirect()->route('admin');
 	}
+ // ---------MARQUEE CONTROL---------
 
-// ---------FAQ CONTROL---------
+ // ---------FAQ CONTROL---------
 	public function faqCreate(Request $request)
 	{
 		$validated = $request->validate([
@@ -154,7 +229,12 @@ class AdminController extends Controller
 
 		return redirect()->route('admin');
 	}
-// ---------FAQ CONTROL---------
+
+ // ---------FAQ CONTROL---------
+
+ // ---------?? CONTROL---------
+
+ // ---------?? CONTROL---------
 
 
 }

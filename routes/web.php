@@ -23,3 +23,9 @@ Route::post('/faq', [AdminController::class, 'faqCreate'])->name('faqCreate');
 Route::get('/faq/edit/{id}', [AdminController::class, 'faqEdit'])->name('faqEdit');
 Route::post('/faq/update/{id}', [AdminController::class, 'faqUpdate'])->name('faqUpdate');
 Route::get('/faq/delete/{id}', [AdminController::class, 'faqDelete'])->name('faqDelete');
+
+// ------Carousel Control------ 
+Route::post('/carousel', [AdminController::class, 'carouselCreate'])->name('carouselCreate');
+Route::get('/carousel/edit/{id}', [AdminController::class, 'carouselEdit'])->name('carouselEdit');
+Route::post('/carousel/update/{id}', [AdminController::class, 'carouselUpdate'])->name('carouselUpdate');
+Route::get('/carousel/delete/{id}', [AdminController::class, 'carouselDelete'])->name('carouselDelete');

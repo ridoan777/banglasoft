@@ -1,6 +1,34 @@
 <x-master>
    <h1 class="text-center">Welcome to Edit Page</h1>
-   <!----- marquee ----->
+
+ <!----- CAROUSEL ----->
+   @if($triggerBlock == 'carousel')
+   <section id="carouselBlock" class="p-4">
+
+      <form action="{{ route('carouselUpdate', $carousel->id) }}" method="POST" enctype="multipart/form-data">
+         @csrf
+         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Replace your carousel file</label>
+
+         <div class="px-2 flex space-x-4">
+            <input class="block w-full" id="multiple_files" type="file" name="slider_img" multiple>
+
+            <!-- status -->
+            <select name="status" class="statusSelect">
+               <option value="" class="text-black" disabled>Status</option>
+               <option value="0">Disable</option>
+               <option value="1" selected>Activate</option>
+            </select>
+
+            <button type="submit" class="saveButton">Save</button>
+         </div>
+
+      </form>
+
+   </section>
+   @endif
+ <!----- CAROUSEL ----->
+
+ <!----- MARQUEE ----->
    @if($triggerBlock == 'marquee')
    <section id="marqueeBlock" class="p-4">
 
@@ -80,9 +108,9 @@
 
    </section>
    @endif
-   <!----- marquee ----->
+ <!----- MARQUEE ----->
 
-   <!----- FAQ ----->
+ <!----- FAQ ----->
    @if($triggerBlock == 'faq')
    <section id="faqBlock" class="p-4">
       <form action="{{ route('faqUpdate', $faq->id) }}" method="POST">
@@ -110,7 +138,9 @@
       </form>
    </section>
    @endif
-   <!----- FAQ ----->
+ <!----- FAQ ----->
+ 
+
 
 
 </x-master>
