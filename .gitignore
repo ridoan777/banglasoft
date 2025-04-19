@@ -16,3 +16,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/ use remote=hub, branch=admin
