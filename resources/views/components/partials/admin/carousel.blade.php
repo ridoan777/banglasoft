@@ -7,7 +7,7 @@
       <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="multiple_files">Upload carousel file</label>
 
       <div class="px-2 flex space-x-4">
-         <input class="block w-full" id="multiple_files" type="file" name="slider_img" multiple>
+         <input class="block w-full" id="multiple_files" type="file" name="slider_img">
 
          <!-- status -->
          <select name="status" class="statusSelect">

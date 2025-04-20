@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('homepage.home');
 // });
 
+// ------Public Pages------ 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/apply-now', [HomeController::class, 'applynow'])->name('applynow');
 
+
+// ------Public Pages------ 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 // ------Marquee Control------ 
@@ -29,3 +33,9 @@ Route::post('/carousel', [AdminController::class, 'carouselCreate'])->name('caro
 Route::get('/carousel/edit/{id}', [AdminController::class, 'carouselEdit'])->name('carouselEdit');
 Route::post('/carousel/update/{id}', [AdminController::class, 'carouselUpdate'])->name('carouselUpdate');
 Route::get('/carousel/delete/{id}', [AdminController::class, 'carouselDelete'])->name('carouselDelete');
+
+// ------Doctor's Form Control------ 
+Route::post('/doctor', [AdminController::class, 'doctorCreate'])->name('doctorCreate');
+Route::get('/doctor/edit/{id}', [AdminController::class, 'doctorEdit'])->name('doctorEdit');
+Route::post('/doctor/update/{id}', [AdminController::class, 'doctorUpdate'])->name('doctorUpdate');
+Route::get('/doctor/delete/{id}', [AdminController::class, 'doctorDelete'])->name('doctorDelete');

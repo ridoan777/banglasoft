@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Carousel;
+use App\Models\Doctor;
 use App\Models\Faq;
 use App\Models\Marquee;
 use Illuminate\Http\Request;
@@ -16,15 +17,17 @@ class AdminController extends Controller
 		$carouselData = Carousel::all();
 		$marqueeData = Marquee::all();
 		$faqData = Faq::all();
+		$doctorData = Doctor::all();
 
 		return view('components.admin.dashboard', [
-			'marqueeData' => $marqueeData, 
+			'marqueeData' => $marqueeData,
 			'faqData' => $faqData,
 			'carouselData' => $carouselData,
+			'doctorData' => $doctorData,
 		]);
 	}
 	// -------------------------------
-	
+
 
  // ---------CARROUSEL CONTROL---------
 	public function carouselCreate(Request $request)
@@ -34,7 +37,8 @@ class AdminController extends Controller
 			'status' => 'required',
 		]);
 
-		if($request->hasFile('slider_img')){
+		if ($request->hasFile('slider_img'))
+		{
 			$slider_img = $request->file('slider_img');
 
 			$imageName = substr(time(), -4) . '.' . $slider_img->getClientOriginalExtension();
@@ -52,18 +56,20 @@ class AdminController extends Controller
 		return redirect()->route('admin');
 	}
 	// ------------------------------
-	public function carouselEdit($id){
+	public function carouselEdit($id)
+	{
 
 		$carousel = Carousel::find($id);
 		$triggerBlock = 'carousel';
 
 		return view('components.partials.admin.edit', [
-			'carousel' => $carousel, 
+			'carousel' => $carousel,
 			'triggerBlock' => $triggerBlock
 		]);
 	}
 	// ------------------------------
-	public function carouselUpdate(Request $request, $id){
+	public function carouselUpdate(Request $request, $id)
+	{
 
 		$carousel = Carousel::findOrFail($id);
 
@@ -72,7 +78,8 @@ class AdminController extends Controller
 			'status' => 'required',
 		]);
 
-		if($request->hasFile('slider_img')){
+		if ($request->hasFile('slider_img'))
+		{
 			$slider_img = $request->file('slider_img');
 
 			$imageName = substr(time(), -4) . '.' . $slider_img->getClientOriginalExtension();
@@ -87,7 +94,8 @@ class AdminController extends Controller
 		return redirect()->route('admin');
 	}
 	// ------------------------------
-	public function carouselDelete($id){
+	public function carouselDelete($id)
+	{
 
 		$carousel = Carousel::find($id);
 		$carousel->delete();
@@ -114,7 +122,8 @@ class AdminController extends Controller
 			'font-size' => $request->font_size,
 		]);
 
-		if ($request->status == 1) {
+		if ($request->status == 1)
+		{
 			Marquee::where('status', 1)->where('id', '!=', $marquee->id)->update(['status' => 0]);
 		}
 
@@ -122,18 +131,20 @@ class AdminController extends Controller
 		return redirect()->route('admin', compact('marqueeData'));
 	}
 	// ------------------------------
-	public function marqueeEdit($id){
+	public function marqueeEdit($id)
+	{
 
 		$marquee = Marquee::find($id);
 		$triggerBlock = 'marquee';
 
 		return view('components.partials.admin.edit', [
-			'marquee' => $marquee, 
+			'marquee' => $marquee,
 			'triggerBlock' => $triggerBlock
 		]);
 	}
 	// ------------------------------
-	public function marqueeUpdate(Request $request, $id){
+	public function marqueeUpdate(Request $request, $id)
+	{
 
 		$marquee = Marquee::find($id);
 
@@ -153,7 +164,8 @@ class AdminController extends Controller
 			'font-size' => $request->font_size,
 		]);
 
-		if ($request->status == 1) {
+		if ($request->status == 1)
+		{
 			Marquee::where('status', 1)->where('id', '!=', $marquee->id)->update(['status' => 0]);
 		}
 
@@ -161,7 +173,8 @@ class AdminController extends Controller
 		return redirect()->route('admin', compact('marqueeData'));
 	}
 	// ------------------------------
-	public function marqueeDelete($id){
+	public function marqueeDelete($id)
+	{
 
 		$marquee = Marquee::find($id);
 		$marquee->delete();
@@ -192,18 +205,20 @@ class AdminController extends Controller
 		return redirect()->route('admin');
 	}
 	// ------------------------------
-	public function faqEdit($id){
+	public function faqEdit($id)
+	{
 
 		$faq = Faq::find($id);
 		$triggerBlock = 'faq';
 
 		return view('components.partials.admin.edit', [
-			'faq' => $faq, 
+			'faq' => $faq,
 			'triggerBlock' => $triggerBlock
 		]);
 	}
 	// ------------------------------
-	public function faqUpdate(Request $request, $id){
+	public function faqUpdate(Request $request, $id)
+	{
 
 		$faq = faq::find($id);
 
@@ -218,11 +233,12 @@ class AdminController extends Controller
 			'content' => $validated['content'],
 			'status' => $validated['status'],
 		]);
-		
+
 		return redirect()->route('admin');
 	}
 	// ------------------------------
-	public function faqDelete($id){
+	public function faqDelete($id)
+	{
 
 		$faq = Faq::find($id);
 		$faq->delete();
@@ -232,9 +248,137 @@ class AdminController extends Controller
 
  // ---------FAQ CONTROL---------
 
- // ---------?? CONTROL---------
+ // ---------DOCTOR CONTROL---------
+	public function doctorCreate(Request $request)
+	{
+		$validated = $request->validate([
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:doctors,email',
+			'phone' => 'required|max:20|unique:doctors,phone',
+			'reg' => 'required|max:100|unique:doctors,reg',
+			'degree_1' => 'required|max:100',
+			'college_1' => 'required|max:255',
+			'degree_2' => 'nullable|max:100',
+			'college_2' => 'nullable|max:255',
+			'time' => 'nullable|max:100',
+			'chamber' => 'nullable|max:255',
+			'fee' => 'nullable|integer',
+			'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+		]);
 
- // ---------?? CONTROL---------
+		if ($request->hasFile('image'))
+		{
+			$image = $request->file('image');
+
+			$originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+			$trimmedName = substr($originalName, 0, 10);
+	  
+			$imageName = $trimmedName . '_' . substr(time(), -4) . '.' . $image->getClientOriginalExtension();
+
+			$image->storeAs('admin_files/doctor', $imageName, 'public');
+
+			$validated['image'] = 'storage/admin_files/doctor/' . $imageName;
+		}
+
+		$doctor = Doctor::create([
+			'name' => $validated['name'],
+			'email' => $validated['email'],
+			'phone' => $validated['phone'],
+			'reg' => $validated['reg'],
+			'degree_1' => $validated['degree_1'],
+			'college_1' => $validated['college_1'],
+			'degree_2' => $validated['degree_2'],
+			'college_2' => $validated['college_2'],
+			'time' => $validated['time'],
+			'chamber' => $validated['chamber'],
+			'fee' => $validated['fee'],
+			'image' => $validated['image'],
+		]);
+
+		return redirect()->route('home')->with('success', 'Doctor record created successfully!');
+	}
+	// ------------------------------
+	public function doctorEdit($id)
+	{
+		$doctor = Doctor::find($id);
+		$triggerBlock = 'doctor';
+
+		return view('components.partials.admin.edit', [
+			'doctor' => $doctor,
+			'triggerBlock' => $triggerBlock
+		]);
+	}
+	// ------------------------------
+	public function doctorUpdate(Request $request, $id)
+	{
+
+		$doctor = Doctor::find($id);
+
+		$validated = $request->validate([
+			'name' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:doctors,email,' . $id,
+			'phone' => 'required|max:20|unique:doctors,phone,' . $id,
+			'reg' => 'required|max:100|unique:doctors,reg,' . $id,
+			'degree_1' => 'required|max:100',
+			'college_1' => 'required|max:255',
+			'degree_2' => 'nullable|max:100',
+			'college_2' => 'nullable|max:255',
+			'time' => 'nullable|max:100',
+			'chamber' => 'nullable|max:255',
+			'fee' => 'nullable|integer',
+			'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+		]);
+
+		if ($request->hasFile('image'))
+		{
+			$image = $request->file('image');
+
+			$originalName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+			$trimmedName = substr($originalName, 0, 10);
+	  
+			$imageName = $trimmedName . '_' . substr(time(), -4) . '.' . $image->getClientOriginalExtension();
+
+			$image->storeAs('admin_files/doctor', $imageName, 'public');
+
+			$validated['image'] = 'storage/admin_files/doctor/' . $imageName;
+
+			$doctor->update([
+				'image' => $validated['image'],
+			]);
+		}
+
+		$doctor->update([
+			'name' => $validated['name'],
+			'email' => $validated['email'],
+			'phone' => $validated['phone'],
+			'reg' => $validated['reg'],
+			'degree_1' => $validated['degree_1'],
+			'college_1' => $validated['college_1'],
+			'degree_2' => $validated['degree_2'],
+			'college_2' => $validated['college_2'],
+			'time' => $validated['time'],
+			'chamber' => $validated['chamber'],
+			'fee' => $validated['fee'],
+		]);
+
+		return redirect()->route('admin')->header('Location', route('admin') . '#adminDoctor');;
+	}
+	// ------------------------------
+	public function doctorDelete($id)
+	{
+
+		$doctor = Doctor::find($id);
+		$doctor->delete();
+
+		return redirect()->route('admin')->header('Location', route('admin') . '#adminDoctor');
+	}
+ // ---------DOCTOR CONTROL---------
+
+	// ---------?? CONTROL---------
+
+	// ---------?? CONTROL---------
 
 
 }

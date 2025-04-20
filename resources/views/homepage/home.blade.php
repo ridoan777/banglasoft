@@ -1,12 +1,14 @@
 <x-master>
 	<div id="homeWrapper" class="">
 
-		<section id="homeCarousel" class="w-full p-1">
-			<h3>This area is reserved for carousel</h3>
+		<!------------>
+		<x-partials.alert :message="session('success')"/>
+		<!------------>
+		<section id="homeCarousel" class="w-full p-0">
 
 			<div id="default-carousel" class="relative w-full" data-carousel="slide">
 			 <!-- Carousel wrapper -->
-				<div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+				<div class="relative h-56 overflow-hidden md:h-100">
 
 					@foreach($carouselData as $index => $carouselItem)
 						<!-- Item 1 -->

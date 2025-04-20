@@ -139,6 +139,115 @@
    </section>
    @endif
  <!----- FAQ ----->
+
+ <!----- DOCTOR ----->
+  @if($triggerBlock == 'doctor')
+  <section id="doctorBlock" class="p-4 mb-20">
+
+      <form action="{{ route('doctorUpdate', $doctor->id) }}" method="POST" enctype="multipart/form-data">
+         @csrf
+         <div class="w-full flex flex-col gap-4 text-orange-500">
+
+            <!-- name -->
+            <div class="flex items-center">
+               <label for="name" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Doctor's Name : 
+               </label>
+               <input type="text" name="name" id="name" class="flex-1 ml-2 w-full" value="{{ $doctor->name }}" required />
+            </div>
+
+            <!-- contact -->
+            <div class="flex items-center">
+               <label for="email" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Email : 
+               </label>
+               <input type="email" name="email" id="email" class="flex-1 ml-2" value="{{ $doctor->email }}" required />
+               <!---->
+               <label for="phone" class="ml-2 flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Phone : 
+               </label>
+               <input type="phone" name="phone" id="phone" class="flex-1 ml-2" value="{{ $doctor->phone }}" required />
+            </div>
+
+            <!-- registration -->
+            <div class="flex items-center">
+               <label for="reg" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Your MRN/BMDC Registration No. : 
+               </label>
+               <input type="text" name="reg" id="reg" class="flex-1 ml-2 w-full" value="{{ $doctor->reg }}" required />
+            </div>
+
+            <!-- degree-1 -->
+            <div class="flex items-center">
+               <label for="degree_1" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Degree [1]: 
+               </label>
+               <input type="text" name="degree_1" id="degree_1" class="flex-1 ml-2" value="{{ $doctor->degree_1 }}" required />
+               <!---->
+               <label for="college_1" class="ml-2 flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Institution : 
+               </label>
+               <input type="text" name="college_1" id="college_1" class="flex-1 ml-2" value="{{ $doctor->college_1 }}" />
+            </div>
+
+            <!-- degree-2 -->
+            <div class="flex items-center">
+               <label for="degree_2" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Degree [2]: 
+               </label>
+               <input type="text" name="degree_2" id="degree_2" class="flex-1 ml-2" value="{{ $doctor->degree_2 }}" />
+               <!---->
+               <label for="college_2" class="ml-2 flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Institution : 
+               </label>
+               <input type="text" name="college_2" id="college_2" class="flex-1 ml-2" value="{{ $doctor->college_2 }}" />
+            </div>
+
+            <!-- details -->
+            <div class="flex items-center">
+               <label for="visit_time" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Visit Time : 
+               </label>
+               <input type="text" name="time" id="visit_time" class="flex-1 ml-2" value="{{ $doctor->time }}" />
+               <!---->
+               <label for="chamber" class="ml-2 flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Chamber Location : 
+               </label>
+               <input type="text" name="chamber" id="chamber" class="flex-1 ml-2" value="{{ $doctor->chamber}}" />
+               <!---->
+               <label for="fee" class="ml-2 flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                  Visiting Fee : 
+               </label>
+               <input type="number" name="fee" id="fee" class="flex-1 ml-2" value="{{ $doctor->fee }}" />
+            </div>
+
+            <!-- Image -->
+            <div class="max-w-1/2 flex items-center gap-8">
+               <img src="{{ asset($doctor->image) }}" alt="{{ $doctor->name }}" class="object-cover">
+               <!--  -->
+               <div class="">
+                  <div class="flex items-center">
+                     <label for="image" class="flex-shrink-0 text-base font-medium text-gray-900 dark:text-white">
+                        Your Image : 
+                     </label>
+                     <input class="flex-1 ml-2" id="image" type="file" name="image">
+                  </div>
+                  <!--  -->
+                  <button name="submit" class="my-4 saveButton">Save</button>
+               </div>
+               <!--  -->
+               
+            </div>
+
+         </div>
+
+         <!--  -->
+
+      </form>
+
+  </section>
+ @endif
+ <!----- DOCTOR ----->
  
 
 

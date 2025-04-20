@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="antialiased bg-gray-500">
+<body class="antialiased bg-gray-100">
 	@yield('content')
 	<!-- header -->
 	 <x-partials.navbar />

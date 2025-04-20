@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
 	public function index(){
-
 		$marqueeData = Marquee::where('status', 1)->first();
 		$faqData = Faq::where('status', 1)->get();
 		$carouselData = Carousel::where('status', 1)->get();
@@ -21,4 +20,10 @@ class HomeController extends Controller
 			'carouselData' => $carouselData,
 		]);
 	}
+	// ----------------------------
+	public function applynow(){
+
+		return view('homepage.applynow');
+	}
+	// ----------------------------
 }

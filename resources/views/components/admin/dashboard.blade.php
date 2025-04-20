@@ -1,5 +1,5 @@
 <x-master>
-   <div id="homeWrapper" class="p-4">
+   <div id="homeWrapper" class="p-4 mb-100">
 
       <h1 class="text-center">Welcome back, Admin!</h1>
       <!------------>
@@ -9,5 +9,7 @@
       <!------------>
       <x-partials.admin.faq :faqData="$faqData"/>
       <!------------>
-
+      <x-partials.admin.doctors :doctorData="$doctorData"/>
+      <!------------>
+   </div>
 </x-master>
