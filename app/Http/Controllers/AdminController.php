@@ -17,7 +17,8 @@ class AdminController extends Controller
 		$carouselData = Carousel::all();
 		$marqueeData = Marquee::all();
 		$faqData = Faq::all();
-		$doctorData = Doctor::all();
+		$doctorData = Doctor::paginate(5);
+		// $doctorData = Doctor::all();
 
 		return view('components.admin.dashboard', [
 			'marqueeData' => $marqueeData,

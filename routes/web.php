@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Route;
 // ------Public Pages------ 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/apply-now', [HomeController::class, 'applynow'])->name('applynow');
+Route::get('/doctors', [HomeController::class, 'doctors'])->name('doctors');
 
 
-// ------Public Pages------ 
+// ------Admin Pages------ 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 // ------Marquee Control------ 

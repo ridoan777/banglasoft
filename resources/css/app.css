@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 /* @import "flowbite"; */
 
 /* input.css */
@@ -136,6 +138,105 @@ select option {
 	.saveButton {
 		@apply text-white bg-green-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800;
 	}
+	.paginationNumber {
+		@apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+	}
+}
+
+@layer utilities {
+	.ugrid-16 {
+	  display: grid;
+	  grid-template-columns: repeat(16, minmax(0, 1fr));
+	  gap: 0.25rem;
+	  width: 100% !important;
+	}
+ 
+	.u-colspan-1  { grid-column: span 1 / span 1; }
+	.u-colspan-2  { grid-column: span 2 / span 2; }
+	.u-colspan-3  { grid-column: span 3 / span 3; }
+	.u-colspan-4  { grid-column: span 4 / span 4; }
+	.u-colspan-5  { grid-column: span 5 / span 5; }
+	.u-colspan-6  { grid-column: span 6 / span 6; }
+	.u-colspan-7  { grid-column: span 7 / span 7; }
+	.u-colspan-8  { grid-column: span 8 / span 8; }
+	.u-colspan-9  { grid-column: span 9 / span 9; }
+	.u-colspan-10 { grid-column: span 10 / span 10; }
+	.u-colspan-11 { grid-column: span 11 / span 11; }
+	.u-colspan-12 { grid-column: span 12 / span 12; }
+	.u-colspan-13 { grid-column: span 13 / span 13; }
+	.u-colspan-14 { grid-column: span 14 / span 14; }
+	.u-colspan-16 { grid-column: span 16 / span 16; }
+
+	/* Add responsive variants */
+	@media (min-width: 768px) {
+	  .md\:u-colspan-1  { grid-column: span 1 / span 1; }
+	  .md\:u-colspan-2  { grid-column: span 2 / span 2; }
+	  .md\:u-colspan-3  { grid-column: span 3 / span 3; }
+	  .md\:u-colspan-4  { grid-column: span 4 / span 4; }
+	  .md\:u-colspan-5  { grid-column: span 5 / span 5; }
+	  .md\:u-colspan-6  { grid-column: span 6 / span 6; }
+	  .md\:u-colspan-7  { grid-column: span 7 / span 7; }
+	  .md\:u-colspan-8  { grid-column: span 8 / span 8; }
+	  .md\:u-colspan-9  { grid-column: span 9 / span 9; }
+	  .md\:u-colspan-10 { grid-column: span 10 / span 10; }
+	  .md\:u-colspan-11 { grid-column: span 11 / span 11; }
+	  .md\:u-colspan-12 { grid-column: span 12 / span 12; }
+	  .md\:u-colspan-13 { grid-column: span 13 / span 13; }
+	  .md\:u-colspan-14 { grid-column: span 14 / span 14; }
+	  .md\:u-colspan-16 { grid-column: span 16 / span 16; }
+	}
+
+	@media (min-width: 1024px) {
+		.lg\:u-colspan-1  { grid-column: span 1 / span 1; }
+		.lg\:u-colspan-2  { grid-column: span 2 / span 2; }
+		.lg\:u-colspan-3  { grid-column: span 3 / span 3; }
+		.lg\:u-colspan-4  { grid-column: span 4 / span 4; }
+		.lg\:u-colspan-5  { grid-column: span 5 / span 5; }
+		.lg\:u-colspan-6  { grid-column: span 6 / span 6; }
+		.lg\:u-colspan-7  { grid-column: span 7 / span 7; }
+		.lg\:u-colspan-8  { grid-column: span 8 / span 8; }
+		.lg\:u-colspan-9  { grid-column: span 9 / span 9; }
+		.lg\:u-colspan-10 { grid-column: span 10 / span 10; }
+		.lg\:u-colspan-11 { grid-column: span 11 / span 11; }
+		.lg\:u-colspan-12 { grid-column: span 12 / span 12; }
+		.lg\:u-colspan-13 { grid-column: span 13 / span 13; }
+		.lg\:u-colspan-14 { grid-column: span 14 / span 14; }
+		.lg\:u-colspan-15 { grid-column: span 15 / span 15; }
+		.lg\:u-colspan-16 { grid-column: span 16 / span 16; }
+	}
+	
+	@media (min-width: 1536px) {
+		.\32xl\:u-colspan-1  { grid-column: span 1 / span 1; }
+		.\32xl\:u-colspan-2  { grid-column: span 2 / span 2; }
+		.\32xl\:u-colspan-3  { grid-column: span 3 / span 3; }
+		.\32xl\:u-colspan-4  { grid-column: span 4 / span 4; }
+		.\32xl\:u-colspan-5  { grid-column: span 5 / span 5; }
+		.\32xl\:u-colspan-6  { grid-column: span 6 / span 6; }
+		.\32xl\:u-colspan-7  { grid-column: span 7 / span 7; }
+		.\32xl\:u-colspan-8  { grid-column: span 8 / span 8; }
+		.\32xl\:u-colspan-9  { grid-column: span 9 / span 9; }
+		.\32xl\:u-colspan-10 { grid-column: span 10 / span 10; }
+		.\32xl\:u-colspan-11 { grid-column: span 11 / span 11; }
+		.\32xl\:u-colspan-12 { grid-column: span 12 / span 12; }
+		.\32xl\:u-colspan-13 { grid-column: span 13 / span 13; }
+		.\32xl\:u-colspan-14 { grid-column: span 14 / span 14; }
+		.\32xl\:u-colspan-15 { grid-column: span 15 / span 15; }
+		.\32xl\:u-colspan-16 { grid-column: span 16 / span 16; }
+	}
+
+	.flex-xy-center{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.flex-col-xy-center{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
 }
 
 /* *******Pages Based Styles******* */
@@ -185,4 +286,6 @@ select option {
 		transform: translateX(-100%);
 	}
 }
+/* ------------------- */
+
 
